@@ -1,0 +1,6 @@
+[ 2016-01-26T17:02:31+08:00 ] ::1 /tpadmin/index.php/api/api/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000388s ]
+ERR: 无法加载模块:Api
+

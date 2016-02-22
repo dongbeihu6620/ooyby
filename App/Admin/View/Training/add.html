@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>添加训练计划</title>
+    <link href="__PUBLIC__/css/admin/reset.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/css/admin/zh-cn-system.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/css/admin/table_form.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/admin/style/zh-cn-styles1.css" title="styles1" media="screen">
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/css/admin/style/zh-cn-styles2.css" title="styles2" media="screen">
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/css/admin/style/zh-cn-styles3.css" title="styles3" media="screen">
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/css/admin/style/zh-cn-styles4.css" title="styles4" media="screen">
+    <script type="text/javascript" src="__PUBLIC__/js/admin/jquery.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/admin/jquery.cookie.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/admin/styleswitch.js"></script>
+
+    <script src="__PUBLIC__/js/admin/jquery.artDialog.source.js?skin=default"></script>
+    <script src="__PUBLIC__/js/admin/plugins/iframeTools.source.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/js/admin/formvalidator.js" charset="UTF-8"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/js/admin/formvalidatorregex.js" charset="UTF-8"></script>
+</head>
+<body>
+<div class="subnav">
+    <div class="content-menu ib-a blue line-x">
+        <a class="add fb" href="__MODULE__/Training/add"><em>添加训练计划</em></a>　    <a href="__MODULE__/Training/index"><em>训练计划列表</em></a>
+    </div>
+</div>
+<div class="pad-lr-10">
+    <form name="myform" id="myform" action="__MODULE__/Training/add" method="post">
+        <table cellpadding=0 cellspacing=0 class="table_form" width="100%">
+            <tr>
+                <td width="10%" align="right">训练计划分类:</td>
+                <td width="90%">
+                    <input type="text" class="input-text " name="info[category]" id="eid" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">训练计划标题:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[title]" id="title" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">训练计划摘要:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[abstract]" id="abstract" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">训练计划内容:</td>
+                <td width="90%">
+                    <textarea name="info[content]" clos="100" rows="10" style="width:600px; height:100px; border:solid 1px #cccccc; border-radius:4px; resize:none;">
+                    </textarea>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">适用左眼视力:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[left_eye]"  value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">适用右眼视力:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[right_eye]"  value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+            <td width="10%" align="right">左眼训练次数:</td>
+            <td width="90%">
+                <input type="text" class="input-text" name="info[left_train_number]"  value="" size="40"/>
+            </td>
+        </tr>
+            <tr>
+                <td width="10%" align="right">左眼训练时长:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[left_train_length]"  value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">右眼训练次数:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[right_train_number]"  value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">右眼训练时长:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[right_train_length]"  value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">左眼按摩次数:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[left_massage_number]"  value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">左眼按摩时长:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[left_massage_length]"  value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">右眼按摩次数:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[right_massage_number]"  value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">右眼按摩时长:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[right_massage_length]"  value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">图片一:</td>
+                <td width="90%">
+                    <input type="text" class="input-text " name="info[pica]"  value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">图片二:</td>
+                <td width="90%">
+                    <input type="text" class="input-text " name="info[picb]"  value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">图片三:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[picc]" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">图片四:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[picd]" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">图片五:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[pice]" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">文件一:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[filea]" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">文件二:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[fileb]" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">文件三:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[filec]" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">文件四:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[filed]" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">文件五:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[filee]" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">相关视力训练:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[relate]"  value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">训练天数:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[date_length]"  value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">状态:</td>
+                <td width="90%">
+                    <label style="float:left;width:75px">
+                        <input type="radio" class="input_radio " name="info[status]" id="status_1" checked value="1"> 启用
+                    </label>
+                    <label style="float:left;width:75px">
+                        <input type="radio" class="input_radio " name="info[status]" id="status_2"  value="0" > 禁用
+                    </label>
+                </td>
+            </tr>
+
+
+        </table>
+        <div class="bk15"></div>
+        <div class="btn">
+            <input type="submit" name="dosubmit" id="dosubmit" value="提交" class='button'>&nbsp;<input type="reset" value="重置" class='button'>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $.formValidator.initConfig({formid:"myform",autotip:true,onerror:function(msg,obj){window.top.art.dialog({content:msg,lock:true,width:'200',height:'50'}, function(){this.close();$(obj).focus();})}});
+        $("#nickname").formValidator({onshow:"请输入对应的中文语言名称",onfocus:"请输入对应的中文语言名称",oncorrect:"输入正确"}).inputValidator({min:1,onerror:"请输入对应的中文语言名称"});
+        $("#module").formValidator({onshow:"请输入模块名",onfocus:"请输入模块名",oncorrect:"输入正确"}).inputValidator({min:1,onerror:"请输入模块名"});
+        $("#action").formValidator({tipid:'a_tip',onshow:"请输入方法名",onfocus:"请输入方法名",oncorrect:"输入正确"}).inputValidator({min:1,onerror:"请输入方法名"});
+    });
+</script>
+</body>
+</html>

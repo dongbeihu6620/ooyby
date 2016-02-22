@@ -1,0 +1,44 @@
+<extend name="Public:list_layout" />
+<block name="title"><title>代理管理</title></block>
+<block name="subnav">
+    <a class="add fb" href="__MODULE__/Agent/add"><em>添加代理</em></a>　
+    <a class="on" href="__MODULE__/Agent/index"><em>代理管理</em></a>
+</block>
+<block name="main">
+    <form name="myform" action="__CONTROLLER__/listorder" method="post">
+        <div class="table-list">
+            <table width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th width="38">排序</th>
+                    <th width="30">编号</th>
+                    <th>代理名称</th>
+                    <th align="left" width="50">联系电话</th>
+                    <th align="left" width="50">代理级别</th>
+                    <th align="center" width="40">状态</th>
+
+                    <!-- <th align="center" width="80">域名绑定须知</th> -->
+                    <th>管理操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php  foreach ($agents as $key => $value) { ?>
+                <tr>
+                    <td align="center"><input name="listorder[<?php echo $value['id']; ?>]" type="text" size="3" value="<?php echo $value['listorder']; ?>" class="input-text-c input-text"></td>
+                    <td align="center"><?php echo $value['id']; ?></td>
+                    <td><?php echo cat_empty_deal($value, $cats[$key+1]['parentid']); ?><?php echo $value['realname']; ?></td>
+                    <td><?php echo $value['phone']; ?></td>
+                    <td align="center"><?php echo $value['level']; ?></td>
+                    <td align="center"><?php echo ($value['status'] ? '正常' : '禁用'); ?></td>
+                    <td align="center"><a href="__MODULE__/Agent/add/id/<?php echo $value['id']; ?>">添加子代理</a> | <a href="__MODULE__/Agent/edit/id/<?php echo $value['id']; ?>">修改</a> | <a onclick="return ConfirmDel();" href="__MODULE__/Agent/del/id/<?php echo $value['id']; ?>">删除</a></td>
+                </tr>
+                <?php } ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="btn">
+            <input type="submit" class="button" name="排序" name="dosubmit" />
+            <!-- <input type="button" class="button" name="dosubmit" onClick="document.myform.action='__CONTROLLER__/delete'" value="删除"/> -->
+        </div>
+    </form>
+</block>

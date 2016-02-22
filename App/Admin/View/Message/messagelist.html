@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+    <title>欧欧眼保仪 - 后台管理中心</title>
+    <link href="__PUBLIC__/css/admin/reset.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/css/admin/zh-cn-system.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/css/admin/table_form.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/admin/style/zh-cn-styles1.css" title="styles1" media="screen">
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/css/admin/style/zh-cn-styles2.css" title="styles2" media="screen">
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/css/admin/style/zh-cn-styles3.css" title="styles3" media="screen">
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/css/admin/style/zh-cn-styles4.css" title="styles4" media="screen">
+    <script type="text/javascript" src="__PUBLIC__/js/admin/jquery.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/admin/jquery.cookie.js"></script>
+
+</head>
+<body width="100%">
+<div class="subnav">
+    <div class="content-menu ib-a blue line-x">
+        <a class="add fb" href="__MODULE__/message/add"><em>发送通知</em></a>　
+        <a class="on" href="__MODULE__/message/index"><em>通知管理</em></a>
+
+        　
+    </div>
+</div>
+<style type="text/css">
+    html{_overflow-y:scroll}
+    .pagelist{ text-align:center; background:#f1f1f1; padding:7px 0;}
+    .pagelist a{ margin:0 5px; border:#6185a2 solid 1px; display:inline-block; padding:2px 6px 1px; line-height:16px; background:#fff; color:#6185a2;}
+    .pagelist span{ margin:0 5px; border:#6185a2 solid 1px; display:inline-block; padding:2px 6px 1px; line-height:16px; color:#6185a2; color:#fff; background:#6185a2;}
+</style>
+<div class="pad-lr-10">
+    <form name="myform" action="__CONTROLLER__/listorder" method="post" id="myform" >
+        <div class="table-list">
+            <table width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th width="50">ID</th>
+                    <th>用户id</th>
+                    <!--<th>用户名称</th>-->
+                    <th>消息id</th>
+                    <th>消息标题</th>
+                    <th>发送时间</th>
+                    <th width="147">阅读状态</th>
+                    <th width="143">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($messages as $key => $message) { ?>
+                <tr>
+                    <td align="center"><input type="text" style="width: 36px; text-align: center; height: 18px;" name="sort[<?php echo $message['id']; ?>]" value="<?php echo $message['id']; ?>" /></td>
+                    <td align="center"><?php echo $message['uid']; ?></td>
+                    <td align="center"><?php echo $message['mid']; ?></td>
+                    <td align="center"><?php echo $title; ?></td>
+                    <td align="center"><?php echo date("Y-m-d H:i:s",$message['dateline']); ?></td>
+                    <td align="center"><?php if($message[status]==1){echo "已读";}else if($message[status]==0){echo "未读";}else{echo "已删除";} ?></td>
+                    <td align="center"><a class="delete" href="__MODULE__/message/messagedel/id/<?php echo $message['id']; ?>/mid/<?php echo $message['mid']; ?>">删除</a>
+                                     </td>
+                </tr>
+                <?php } ?>
+                </tbody>
+            </table>
+            <div class="pagelist">{$page}</div>
+        </div>
+        <div class="btn">
+            <input type="submit" class="button" name="dosubmit" value="排序"/>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $(".delete").click(function( e ){
+            _this = $(this);
+            e.preventDefault();
+            window.top.art.dialog({
+                content:'确认删除该通知信息？',
+                lock:true,
+                width:'200',
+                height:'50',
+                cancel: true,
+                ok: function () {
+                    document.location.href = _this.attr('href');
+                }
+            });
+        })
+    })
+</script>
+</body>
+</html>

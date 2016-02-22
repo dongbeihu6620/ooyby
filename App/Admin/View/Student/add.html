@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>添加学生</title>
+    <link href="__PUBLIC__/css/admin/reset.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/css/admin/zh-cn-system.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/css/admin/table_form.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/admin/style/zh-cn-styles1.css" title="styles1" media="screen">
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/css/admin/style/zh-cn-styles2.css" title="styles2" media="screen">
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/css/admin/style/zh-cn-styles3.css" title="styles3" media="screen">
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/css/admin/style/zh-cn-styles4.css" title="styles4" media="screen">
+    <script type="text/javascript" src="__PUBLIC__/js/admin/jquery.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/admin/jquery.cookie.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/admin/styleswitch.js"></script>
+
+    <script src="__PUBLIC__/js/admin/jquery.artDialog.source.js?skin=default"></script>
+    <script src="__PUBLIC__/js/admin/plugins/iframeTools.source.js"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/js/admin/formvalidator.js" charset="UTF-8"></script>
+    <script language="javascript" type="text/javascript" src="__PUBLIC__/js/admin/formvalidatorregex.js" charset="UTF-8"></script>
+</head>
+<body>
+<div class="subnav">
+    <div class="content-menu ib-a blue line-x">
+        <a class="add fb" href="__MODULE__/Student/add"><em>添加学生</em></a>　    <a href="__MODULE__/Student/index"><em>学生管理</em></a>
+    </div>
+</div>
+<div class="pad-lr-10">
+    <form name="myform" id="myform" action="__MODULE__/Student/add" method="post">
+        <table cellpadding=0 cellspacing=0 class="table_form" width="100%">
+            <tr>
+                <td width="10%" align="right">学生昵称:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[nickname]" id="nickname" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">真实姓名:</td>
+                <td width="90%">
+                    <input type="text" class="input-text " name="info[realname]" id="realname" value="" size="40"/>
+                    <span id="for_module" ></span>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">学号:</td>
+                <td width="90%">
+                    <input type="text" class="input-text " name="info[number]" id="number" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">年龄:</td>
+                <td width="90%">
+                    <input type="text" class="input-text " name="info[age]" id="age" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">性别:</td>
+                <td width="90%">
+                    <label style="float:left;width:75px">
+                        <input type="radio" class="input_radio " name="info[gender]" id="age_1" checked value="1"> 男
+                    </label>
+                    <label style="float:left;width:75px">
+                        <input type="radio" class="input_radio " name="info[gender]" id="age_2"  value="2" > 女
+                    </label>
+                    <label style="float:left;width:75px">
+                        <input type="radio" class="input_radio " name="info[gender]" id="age_3"  value="0" > 保密
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">生日:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[birthyear]" value="" size="10"/>年<input type="text" class="input-text" name="info[birthmonth]" value="" size="5"/>月<input type="text" class="input-text" name="info[birthday]" value="" size="5"/>日
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">学校:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[school]" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">年级:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[grade]" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">班级:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[classes]" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">注册时间:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[add_date]" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">左眼视力:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[left_eye]" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">右眼视力:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[right_eye]" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">是否带眼镜:</td>
+                <td width="90%">
+                    <label style="float:left;width:75px">
+                        <input type="radio" class="input_radio " name="info[glasses]" id="glasses_1" checked value="1"> 是
+                    </label>
+                    <label style="float:left;width:75px">
+                        <input type="radio" class="input_radio " name="info[glasses]" id="glasses_2"  value="0" > 否
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">弱视情况:</td>
+                <td width="90%">
+                    <label style="float:left;width:75px">
+                        <input type="radio" class="input_radio " name="info[weak_sight]" id="weak_sight_1" checked value="1"> 是
+                    </label>
+                    <label style="float:left;width:75px">
+                        <input type="radio" class="input_radio " name="info[weak_sight]" id="weak_sight_2"  value="0" > 否
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">散光情况:</td>
+                <td width="90%">
+                    <label style="float:left;width:75px">
+                        <input type="radio" class="input_radio " name="info[astigmia]" id="astigmia_1" checked value="0"> 无散光
+                    </label>
+                    <label style="float:left;width:75px">
+                        <input type="radio" class="input_radio " name="info[astigmia]" id="astigmia_2"  value="1" > 左眼散光
+                    </label>
+                    <label style="float:left;width:75px">
+                        <input type="radio" class="input_radio " name="info[astigmia]" id="astigmia_3"  value="2"> 右眼散光
+                    </label>
+                    <label style="float:left;width:75px">
+                        <input type="radio" class="input_radio " name="info[astigmia]" id="astigmia_4"  value="3" > 双眼散光
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">左眼散光度数:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[left_astigmia]" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">右眼散光度数:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[right_astigmia]" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">斜视情况:</td>
+                <td width="90%">
+                    <label style="float:left;width:75px">
+                        <input type="radio" class="input_radio " name="info[look_sideways]" id="look_sideways_1" checked value="0"> 无斜视
+                    </label>
+                    <label style="float:left;width:75px">
+                        <input type="radio" class="input_radio " name="info[look_sideways]" id="look_sideways_2"  value="1" > 左眼斜视
+                    </label>
+                    <label style="float:left;width:75px">
+                        <input type="radio" class="input_radio " name="info[look_sideways]" id="look_sideways_3"  value="2"> 右眼斜视
+                    </label>
+                    <label style="float:left;width:75px">
+                        <input type="radio" class="input_radio " name="info[look_sideways]" id="look_sideways_4"  value="3" > 双眼斜视
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">联系手机:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[phone]" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">登录密码:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[password]" value="123456" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">状态:</td>
+                <td width="90%">
+                    <label style="float:left;width:75px">
+                        <input type="radio" class="input_radio " name="info[status]" id="status_1" checked value="1"> 启用
+                    </label>
+                    <label style="float:left;width:75px">
+                        <input type="radio" class="input_radio " name="info[status]" id="status_2"  value="0" > 禁用
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">兴趣爱好:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[interest]" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">备注:</td>
+                <td width="90%"><textarea name="info[content]" rows="3" cols="60" id="content"/></textarea>
+                </td>
+            </tr>
+        </table>
+        <div class="bk15"></div>
+        <div class="btn">
+            <input type="submit" name="dosubmit" id="dosubmit" value="提交" class='button'>&nbsp;<input type="reset" value="重置" class='button'>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $.formValidator.initConfig({formid:"myform",autotip:true,onerror:function(msg,obj){window.top.art.dialog({content:msg,lock:true,width:'200',height:'50'}, function(){this.close();$(obj).focus();})}});
+        $("#nickname").formValidator({onshow:"请输入对应的中文语言名称",onfocus:"请输入对应的中文语言名称",oncorrect:"输入正确"}).inputValidator({min:1,onerror:"请输入对应的中文语言名称"});
+        $("#module").formValidator({onshow:"请输入模块名",onfocus:"请输入模块名",oncorrect:"输入正确"}).inputValidator({min:1,onerror:"请输入模块名"});
+        $("#action").formValidator({tipid:'a_tip',onshow:"请输入方法名",onfocus:"请输入方法名",oncorrect:"输入正确"}).inputValidator({min:1,onerror:"请输入方法名"});
+    });
+</script>
+</body>
+</html>

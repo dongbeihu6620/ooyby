@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>视力曲线图</title>
+    <link rel="stylesheet" href="__PUBLIC__/css/style.css" type="text/css">
+    <script src="__PUBLIC__/js/amcharts/amcharts.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/js/amcharts/xy.js" type="text/javascript"></script>
+    <style type="text/css">
+        <!--
+        .hr0{ height:1px;border:none;border-top:1px dashed #0066CC;}
+        .hr1{ height:1px;border:none;border-top:1px solid #555555;}
+        -->
+    </style>
+
+    <script>
+        var chart;
+
+        var chartData = [
+        <?php foreach ($data as $key => $datas) { ?>
+            {
+                "date": "<?php echo date("Y-m-d", $datas['add_time']); ?>",
+                "ay": <?php echo $datas['left_eye']; ?>,
+                "by": <?php echo $datas['right_eye']; ?>
+            },
+        <?php } ?>
+
+        ];
+
+        AmCharts.ready(function () {
+            // XY CHART
+
+            chart = new AmCharts.AmXYChart();
+            chart.dataDateFormat = "YYYY-MM-DD";
+
+            chart.dataProvider = chartData;
+            chart.startDuration = 1;
+
+            // AXES
+            // X
+            var xAxis = new AmCharts.ValueAxis();
+            xAxis.title = "测试时间";
+            xAxis.position = "bottom";
+            xAxis.dashLength = 1;
+            xAxis.axisAlpha = 0;
+            xAxis.type = "date";
+            xAxis.autoGridCount = true;
+            chart.addValueAxis(xAxis);
+
+            // Y
+            var yAxis = new AmCharts.ValueAxis();
+            yAxis.position = "left";
+            yAxis.title = "视力情况";
+            yAxis.dashLength = 1;
+            yAxis.axisAlpha = 0;
+            yAxis.autoGridCount = true;
+            chart.addValueAxis(yAxis);
+
+            // GRAPHS
+            // triangles up
+            var graph1 = new AmCharts.AmGraph();
+            graph1.lineColor = "#FF6600";
+            graph1.balloonText = "x:[[x]] y:[[y]]";
+            graph1.xField = "date";
+            graph1.yField = "ay";
+            graph1.lineAlpha = 1;
+            graph1.type = "smoothedLine";
+            graph1.bullet = "triangleUp";
+            chart.addGraph(graph1);
+
+            // triangles down
+            var graph2 = new AmCharts.AmGraph();
+            graph2.lineColor = "#FCD202";
+            graph2.balloonText = "x:[[x]] y:[[y]]";
+            graph2.xField = "date";
+            graph2.yField = "by";
+            graph2.lineAlpha = 1;
+            graph2.type = "smoothedLine";
+            graph2.bullet = "triangleDown";
+            chart.addGraph(graph2);
+
+            // first trend line
+            var trendLine = new AmCharts.TrendLine();
+            trendLine.lineColor = "#FF6600";
+            trendLine.initialXValue = 1;
+            trendLine.initialValue = 2;
+            trendLine.finalXValue = 12;
+            trendLine.finalValue = 11;
+            chart.addTrendLine(trendLine);
+
+            // second trend line
+            trendLine = new AmCharts.TrendLine();
+            trendLine.lineColor = "#FCD202";
+            trendLine.initialXValue = 1;
+            trendLine.initialValue = 1;
+            trendLine.finalXValue = 12;
+            trendLine.finalValue = 19;
+            chart.addTrendLine(trendLine);
+
+            // CURSOR
+            var chartCursor = new AmCharts.ChartCursor();
+            chart.addChartCursor(chartCursor);
+
+            // SCROLLBAR
+
+            var chartScrollbar = new AmCharts.ChartScrollbar();
+            chart.addChartScrollbar(chartScrollbar);
+
+            // WRITE
+            chart.write("chartdiv");
+        });
+    </script>
+</head>
+
+<body>
+<div style="font-size: 16px;font-weight:blod;margin-left: 400px;"><?php echo $title; ?>-测试结果</div>
+<div style="margin-left: 650px;">查询时间：<?php echo date('y年m月d日 h:i:s',time()); ?></div>
+<div id="chartdiv" style="width: 900px; height: 420px;"></div>
+<div style="margin-left: 400px;"><span style="color:#FF6600;" >左眼视力<span/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#FCD202;" >右眼视力</span></div>
+</body>
+
+</html>

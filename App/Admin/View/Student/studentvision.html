@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+    <title>欧欧眼保仪 - 后台管理中心</title>
+    <link href="__PUBLIC__/css/admin/reset.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/css/admin/zh-cn-system.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/css/admin/table_form.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/admin/style/zh-cn-styles1.css" title="styles1" media="screen">
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/css/admin/style/zh-cn-styles2.css" title="styles2" media="screen">
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/css/admin/style/zh-cn-styles3.css" title="styles3" media="screen">
+    <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/css/admin/style/zh-cn-styles4.css" title="styles4" media="screen">
+    <script type="text/javascript" src="__PUBLIC__/js/admin/jquery.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/admin/jquery.cookie.js"></script>
+
+</head>
+<body width="100%">
+<div class="subnav">
+    <div class="content-menu ib-a blue line-x">
+        <a class="add fb" href="__MODULE__/student/add"><em>添加学生</em></a>　
+        <a class="on" href="__MODULE__/student/index"><em>学生管理</em></a>　
+    </div>
+</div>
+<style type="text/css">
+    html{_overflow-y:scroll}
+    .pagelist{ text-align:center; background:#f1f1f1; padding:7px 0;}
+    .pagelist a{ margin:0 5px; border:#6185a2 solid 1px; display:inline-block; padding:2px 6px 1px; line-height:16px; background:#fff; color:#6185a2;}
+    .pagelist span{ margin:0 5px; border:#6185a2 solid 1px; display:inline-block; padding:2px 6px 1px; line-height:16px; color:#6185a2; color:#fff; background:#6185a2;}
+</style>
+<div class="pad-lr-10">
+    <form name="myform" action="__CONTROLLER__/listorder" method="post" id="myform" >
+        <div class="table-list">
+            <table width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th width="50">ID</th>
+                    <th>学校</th>
+                    <th>年级</th>
+                    <th>班级</th>
+                    <th>学生姓名</th>
+                    <th>左眼视力</th>
+                    <th>右眼视力</th>
+                    <th>测试时间</th>
+                    <th width="147">状态</th>
+                    <th width="143">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($visions as $key => $vision) { ?>
+                <tr>
+                    <td align="center"><input type="text" style="width: 36px; text-align: center; height: 18px;" name="sort[<?php echo $vision['vid']; ?>]" value="<?php echo $vision['vid']; ?>" /></td>
+                    <td align="center"><?php echo $vision['school']; ?></td>
+                    <td align="center"><?php echo $vision['grade']; ?></td>
+                    <td align="center"><?php echo $vision['classes']; ?></td>
+                    <td align="center"><?php echo $vision['realname']; ?></td>
+                    <td align="center"><?php echo $vision['left_eye']; ?></td>
+                    <td align="center"><?php echo $vision['right_eye']; ?></td>
+                    <td align="center"><?php echo date("Y-m-d H:i:s",$vision['add_time']); ?></td>
+                    <td align="center"><?php if($vision[status]==1){echo "启用";}else{echo "禁用";} ?></td>
+                    <td align="center"><a href="__MODULE__/vision/edit/vid/<?php echo $vision['vid']; ?>">修改</a>
+                                     | <a class="delete" href="__MODULE__/vision/del/vid/<?php echo $vision['vid']; ?>">删除</a>
+                                     | <a href="__MODULE__/vision/barline/sid/<?php echo $vision['sid']; ?>/name/<?php echo $vision['realname']; ?>">视力图</a>
+                                     </td>
+                </tr>
+                <?php } ?>
+                </tbody>
+            </table>
+            <div class="pagelist">{$page}</div>
+        </div>
+        <div class="btn">
+            <input type="submit" class="button" name="dosubmit" value="排序"/>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $(".delete").click(function( e ){
+            _this = $(this);
+            e.preventDefault();
+            window.top.art.dialog({
+                content:'确认删除该视力数据？',
+                lock:true,
+                width:'200',
+                height:'50',
+                cancel: true,
+                ok: function () {
+                    document.location.href = _this.attr('href');
+                }
+            });
+        })
+    })
+</script>
+</body>
+</html>
