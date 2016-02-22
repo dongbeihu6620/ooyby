@@ -32,7 +32,7 @@ class EquipmentController extends CommonController {
         $page->setConfig('last','尾页');
         $page->setConfig('theme','%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END% 第 '.I('p',1).' 页/共 %TOTAL_PAGE% 页 ( '.$pagecount.' 条/页 共 %TOTAL_ROW% 条)');
         $show = $page->show();
-        $equipments = $this->db->limit($page->firstRow.','.$page->listRows)->order('eid desc')->select();
+        $equipments = $this->db->equipment_list()->limit($page->firstRow.','.$page->listRows)->select();
 
         $this->assign('page',$show);
         $this->assign('equipments', $equipments);

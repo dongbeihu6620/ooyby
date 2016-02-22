@@ -35,8 +35,8 @@
                 <tr>
                     <th width="50">ID</th>
                     <th>设备名称</th>
-                    <th>学生姓名</th>
                     <th>家长姓名</th>
+                    <th>学生姓名</th>
                     <th>设备号</th>
                     <th>设备类型</th>
                     <th width="147">激活状态</th>
@@ -48,8 +48,8 @@
                 <tr>
                     <td align="center"><input type="text" style="width: 36px; text-align: center; height: 18px;" name="sort[<?php echo $Equipment['eid']; ?>]" value="<?php echo $Equipment['eid']; ?>" /></td>
                     <td align="center"><?php echo $Equipment['name']; ?></td>
-                    <td align="center"><?php echo $Equipment['uid']; ?></td>
-                    <td align="center"><?php echo $Equipment['mid']; ?></td>
+                    <td align="center"><?php echo $Equipment['uname']; ?></td>
+                    <td align="center"><?php echo $Equipment['sname']; ?></td>
                     <td align="center"><?php echo $Equipment['num']; ?></td>
                     <td align="center"><?php if($Equipment[type]==1){echo "seex";}else if($Equipment[type]==2){echo "视力测试机";}else{echo "暂无";}  ?></td>
                     <td align="center"><?php if($Equipment[status]==1){echo "已激活";}else{echo "未激活";} ?></td>
