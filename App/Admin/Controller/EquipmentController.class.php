@@ -37,7 +37,6 @@ class EquipmentController extends CommonController {
 
         //$day_list = array('2016-02-21','2016-02-20','2016-02-19','2016-02-17');
         //$days = $this->continue_day($day_list);
-
         $this->assign('page',$show);
         $this->assign('equipments', $equipments);
         $this->display();
@@ -46,7 +45,7 @@ class EquipmentController extends CommonController {
     public function add() {
         if (IS_POST) {
             $_POST['info']['status']= 0;
-            $_POST['info']['activation_code']=$this->getRandomString(9);
+            $_POST['info']['activation_code']=$this->getRandomString(10);
             $this->checkToken();
             if ($this->db->add($_POST['info']) > 0) {
                 $this->success('操作成功！', "index");
@@ -54,6 +53,10 @@ class EquipmentController extends CommonController {
                 $this->error('操作失败！');
             }
         } else {
+            $this->assign("members", D("member")->order('uid desc')->select());
+            $this->assign("students", D("student")->order('sid desc')->select());
+            $this->assign("schools", D("school")->order('id desc')->select());
+            $this->assign("agents", D("user")->order('id')->where('level > 0')->select());
             $this->assign("equipments", $this->db->select());
             $this->display();
         }
@@ -75,8 +78,17 @@ class EquipmentController extends CommonController {
             }
 
             $equipment = $this->db->find($eid);
+
             $this->assign('eid', $eid);
+            $this->assign('uid', $equipment['uid']);
+            $this->assign('sid', $equipment['sid']);
+            $this->assign('cid', $equipment['cid']);
+            $this->assign('id', $equipment['aid']);
             $this->assign("equipment", $equipment);
+            $this->assign("members", D("member")->order('uid desc')->select());
+            $this->assign("students", D("student")->order('sid desc')->select());
+            $this->assign("schools", D("school")->order('id desc')->select());
+            $this->assign("agents", D("user")->order('id')->where('level > 0')->select());
             $this->display();
         }
     }
@@ -202,6 +214,20 @@ class EquipmentController extends CommonController {
             $str .= $chars[mt_rand(0, $lc)];
         }
         return $str;
+    }
+
+    /**
+     * ajax检查设备号是否存在
+     */
+    public function check_num() {
+        if (!$_GET['num']) exit("0");
+        $num = $_GET['num'];
+        $nums = $this->db->where("num = '%s'",$num)->find();
+        if($nums) {
+            exit("0");
+        } else {
+            exit("1");
+        }
     }
 
 

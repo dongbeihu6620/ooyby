@@ -12,17 +12,20 @@ class VisionModel extends Model {
     protected $tableName = 'vision';
 
     public function visionslist($map) {
-        $visions = $this->table('xy_vision v, xy_student s')
-            ->where('v.sid = s.sid')
+        $visions = $this->table('xy_vision v,xy_student s,xy_classes c,xy_school l')
+            ->where('v.sid = s.sid and c.id = s.classes and l.id = s.school')
             ->where($map)
-            ->field('v.vid as vid, s.sid as sid,v.left_eye as left_eye, v.right_eye as right_eye,v.add_time as add_time,s.nickname as nickname,s.realname as realname,s.gender as gender,s.age as age,s.school as school,s.grade as grade,s.classes as classes,v.status as status')
+            ->field('v.vid as vid, v.left_eye as left_eye, v.right_eye as right_eye,v.add_time as add_time,v.status as status,
+            s.realname as realname,l.name as school,c.grade as grade,c.classes as classes')
             ->order('v.vid desc');
         return $visions;
     }
 
     public function visionlist() {
-        $visions = $this->table('xy_vision v, xy_student s')->where('v.sid = s.sid')
-            ->field('v.vid as vid, s.sid as sid,v.left_eye as left_eye, v.right_eye as right_eye,v.add_time as add_time,s.nickname as nickname,s.realname as realname,s.gender as gender,s.age as age,s.school as school,s.grade as grade,s.classes as classes,v.status as status')
+        $visions = $this->table('xy_vision v,xy_student s,xy_classes c,xy_school l')
+            ->where('v.sid = s.sid and c.id = s.classes and l.id = s.school')
+            ->field('v.vid as vid, v.left_eye as left_eye, v.right_eye as right_eye,v.add_time as add_time,v.status as status,
+            s.realname as realname,l.name as school,c.grade as grade,c.classes as classes')
             ->order('v.vid desc');
         return $visions;
     }

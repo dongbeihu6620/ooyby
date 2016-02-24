@@ -31,7 +31,7 @@
             <tr>
                 <td width="10%" align="right">设备号:</td>
                 <td width="90%">
-                    <input type="text" class="input-text" name="info[num]" id="num" value="" size="40"/>
+                    <input type="text" class="input-text" name="info[num]" id="num" value="" size="40" />
                 </td>
             </tr>
             <tr>
@@ -43,7 +43,7 @@
             <tr>
                 <td width="10%" align="right">设备类型:</td>
                 <td width="90%">
-                    <select name="info[type]" id="parentid">
+                    <select name="info[type]" id="type">
                         <option value="0">≡ 选择设备类型 ≡</option>
                         <option value="1">SEEX</option>
                         <option value="2">视力测试机</option>
@@ -59,13 +59,45 @@
             <tr>
                 <td width="10%" align="right">所属家长:</td>
                 <td width="90%">
-                    <input type="text" class="input-text" name="info[uid]"  value="" size="40"/>
+                    <select name="info[uid]" id="uid">
+                        <option value="0" <?php if($uid == 0) echo "selected"; ?>>≡ 选择家长 ≡</option>
+                        <?php  foreach ($members as $key => $member) { ?>
+                        <option value="<?php echo $member['uid'] ?>" ><?php echo $member['realname']; ?></option>
+                        <?php } ?>
+                    </select>
                 </td>
             </tr>
             <tr>
                 <td width="10%" align="right">所属学生:</td>
                 <td width="90%">
-                    <input type="text" class="input-text" name="info[sid]"  value="" size="40"/>
+                    <select name="info[sid]" id="sid">
+                        <option value="0" <?php if($sid == 0) echo "selected"; ?>>≡ 选择学生 ≡</option>
+                        <?php  foreach ($students as $key => $student) { ?>
+                        <option value="<?php echo $student['sid'] ?>" ><?php echo $student['realname']; ?></option>
+                        <?php } ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">所属学校:</td>
+                <td width="90%">
+                    <select name="info[cid]" id="cid">
+                        <option value="0" <?php if($cid == 0) echo "selected"; ?>>≡ 选择学校 ≡</option>
+                        <?php  foreach ($schools as $key => $school) { ?>
+                        <option value="<?php echo $school['id'] ?>" ><?php echo $school['name']; ?></option>
+                        <?php } ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">所属代理:</td>
+                <td width="90%">
+                    <select name="info[aid]" id="aid">
+                        <option value="0" <?php if($id == 0) echo "selected"; ?>>≡ 作为一级代理 ≡</option>
+                        <?php  foreach ($agents as $key => $value) { ?>
+                        <option value="<?php echo $value['id'] ?>" <?php if($id == $value['id']) echo "selected"; ?>><?php echo cat_empty_deal($value, $agents[$key+1]['parentid'],'parentid','&nbsp;&nbsp;&nbsp;'); ?><?php echo $value['realname']; ?></option>
+                        <?php } ?>
+                    </select>
                 </td>
             </tr>
         </table>
@@ -79,7 +111,8 @@
 <script type="text/javascript">
     $(function(){
         $.formValidator.initConfig({formid:"myform",autotip:true,onerror:function(msg,obj){window.top.art.dialog({content:msg,lock:true,width:'200',height:'50'}, function(){this.close();$(obj).focus();})}});
-        $("#num").formValidator({onshow:"请输入设备号",onfocus:"请输入设备号",oncorrect:"输入正确"}).inputValidator({min:1,onerror:"请输入设备号"});
+        $("#num").formValidator({onshow:"请输入设备号",onfocus:"请输入设备号"}).inputValidator({min:1,onerror:"请输入设备号"}).ajaxValidator({type : "get",url : "__CONTROLLER__/check_num",data :"",datatype : "html",cached:false,async:'false',success : function(data){ if( data == "1" ){return true;}else{return false;}},buttons: $("#dosubmit"),onerror : "设备号已存在",onwait : "正在连接，请稍候。"});
+        $("#type").formValidator({onshow:"请选择设备类型",onfocus:"请选择设备类型",oncorrect:"输入正确"}).inputValidator({min:1,onerror:"请选择设备类型"});
     });
 </script>
 </body>
