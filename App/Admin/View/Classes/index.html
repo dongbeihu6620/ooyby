@@ -13,13 +13,13 @@
     <link rel="alternate stylesheet" type="text/css" href="__PUBLIC__/css/admin/style/zh-cn-styles4.css" title="styles4" media="screen">
     <script type="text/javascript" src="__PUBLIC__/js/admin/jquery.min.js"></script>
     <script type="text/javascript" src="__PUBLIC__/js/admin/jquery.cookie.js"></script>
+
 </head>
 <body width="100%">
 <div class="subnav">
     <div class="content-menu ib-a blue line-x">
-        <a class="add fb" href="__MODULE__/Equipment/add_detail"><em>添加终端记录</em></a>　
-        <a class="on" href="__MODULE__/Equipment/detail_index"><em>终端记录管理</em></a>　
-        <a class="on" href="__MODULE__/Equipment/detail_count"><em>统计数据</em></a>　
+        <a class="add fb" href="__MODULE__/Classes/add"><em>添加班级</em></a>
+        <a class="on" href="__MODULE__/Classes/index"><em>班级管理</em></a>
     </div>
 </div>
 <style type="text/css">
@@ -35,22 +35,26 @@
                 <thead>
                 <tr>
                     <th width="50">ID</th>
-                    <th>设备名称</th>
-                    <th>访问时长</th>
-                    <th>添加时间</th>
+                    <th>学校名称</th>
+                    <th>年级</th>
+                    <th>班级</th>
+                    <th>排序</th>
+                    <th >状态</th>
                     <th width="143">操作</th>
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($equipment_details as $key => $equipment_detail) { ?>
+                <?php foreach ($classes as $key => $classes) { ?>
                 <tr>
-                    <td align="center"><input type="text" style="width: 36px; text-align: center; height: 18px;" name="sort[<?php echo $equipment_detail['id']; ?>]" value="<?php echo $equipment_detail['id']; ?>" /></td>
-                    <td align="center"><?php echo $equipment_detail['name']; ?></td>
-                    <td align="center"><?php echo $equipment_detail['use_length']; ?></td>
-                    <td align="center"><?php echo date("Y-m-d H:i:s",$equipment_detail['dateline']); ?></td>
-                    <td align="center"><a href="__MODULE__/Equipment/edit_detail/id/<?php echo $equipment_detail['id']; ?>">修改</a>
-                                     | <a class="delete" href="__MODULE__/Equipment/del_detail/id/<?php echo $equipment_detail['id']; ?>">删除</a>
-                                     </td>
+                    <td align="center"><input type="text" style="width: 36px; text-align: center; height: 18px;" name="sort[<?php echo $classes['id']; ?>]" value="<?php echo $classes['id']; ?>" /></td>
+                    <td align="center"><?php echo $classes['name']; ?></td>
+                    <td align="center"><?php echo $classes['grade']; ?></td>
+                    <td align="center"><?php echo $classes['classes']; ?></td>
+                    <td align="center"><?php echo $classes['orderlist']; ?></td>
+                    <td align="center"><?php if($classes[status]==1){echo "启用";}else{echo "禁用";} ?></td>
+                    <td align="center"><a href="__MODULE__/Classes/edit/id/<?php echo $classes['id']; ?>">修改</a>
+                        | <a class="delete" href="__MODULE__/Classes/del/id/<?php echo $classes['id']; ?>">删除</a>
+                    </td>
                 </tr>
                 <?php } ?>
                 </tbody>
@@ -68,7 +72,7 @@
             _this = $(this);
             e.preventDefault();
             window.top.art.dialog({
-                content:'确认删除该设备？',
+                content:'确认删除该通知信息？',
                 lock:true,
                 width:'200',
                 height:'50',

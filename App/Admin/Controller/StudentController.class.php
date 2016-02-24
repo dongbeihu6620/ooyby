@@ -26,10 +26,10 @@ class StudentController extends CommonController {
         $page->setConfig('theme','%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END% 第 '.I('p',1).' 页/共 %TOTAL_PAGE% 页 ( '.$pagecount.' 条/页 共 %TOTAL_ROW% 条)');
         $show = $page->show();
         if ($_SESSION['user_info']['level'] != 0){//如果是代理商
-            $students = D("Student")->where($map)->order("sid desc")->limit($page->firstRow.','.$page->listRows)->select();
+            $students = D("Student")->where($map)->studentsList()->limit($page->firstRow.','.$page->listRows)->select();
         }
         else{
-            $students = D("Student")->order("sid desc")->limit($page->firstRow.','.$page->listRows)->select();
+            $students = D("Student")->studentsList()->limit($page->firstRow.','.$page->listRows)->select();
         }
         $this->assign('page',$show);
         $this->assign('students', $students);

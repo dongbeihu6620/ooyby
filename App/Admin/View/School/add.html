@@ -22,24 +22,63 @@
 <body>
 <div class="subnav">
     <div class="content-menu ib-a blue line-x">
-        <a class="add fb" href="__MODULE__/Equipment/add_detail"><em>添加设备记录</em></a>　    <a href="__MODULE__/Equipment/detail_index"><em>设备记录列表</em></a>
+        <a class="add fb" href="__MODULE__/School/add"><em>添加学校</em></a>　    <a href="__MODULE__/School/index"><em>学校列表</em></a>
     </div>
 </div>
 <div class="pad-lr-10">
-    <form name="myform" id="myform" action="__MODULE__/Equipment/add_detail" enctype="multipart/form-data" method="post">
+    <form name="myform" id="myform" action="__MODULE__/School/add" method="post">
         <table cellpadding=0 cellspacing=0 class="table_form" width="100%">
+
             <tr>
-                <td width="10%" align="right">设备名称:</td>
+                <td width="10%" align="right">学校名称:</td>
                 <td width="90%">
-                    <input type="text" class="input-text" name="info[eid]"  value="" size="40"/>
+                    <input type="text" class="input-text " name="info[name]" id="name" value="" size="40"/>
                 </td>
             </tr>
             <tr>
-                <td width="10%" align="right">使用时长:</td>
+                <td width="10%" align="right">联系方式:</td>
                 <td width="90%">
-                    <input type="text" class="input-text " name="info[use_length]"  value="" size="40"/>
+                    <input type="text" class="input-text" name="info[phone]" id="title" value="" size="40"/>
                 </td>
             </tr>
+            <tr>
+                <td width="10%" align="right">省:</td>
+                <td width="90%">
+                    <input type="text" class="input-text " name="info[province]" id="left_eye" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">市:</td>
+                <td width="90%">
+                    <input type="text" class="input-text " name="info[city]" id="right_eye" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">区:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[district]" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">详细地址:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[address]" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">邮政编码:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[zipcode]" value="" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">学段:</td>
+                <td width="90%">
+                    <input type="text" class="input-text" name="info[level]" value="" size="40"/>
+                </td>
+            </tr>
+
+
         </table>
         <div class="bk15"></div>
         <div class="btn">

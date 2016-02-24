@@ -161,6 +161,34 @@ class VisionController extends Controller
         }
     }
 
+    //获取某学校学生信息
+    public function schools_student($sid) {
+        if(empty($sid)){
+            $this->returnApiError('学校信息为空');
+        }
+        $visions = D("Student")->where('school = %d',$sid)->select();
+        if ($visions){
+            $this->returnApiSuccess('',$visions);
+        }
+        else{
+            $this->returnApiError('无数据');
+        }
+    }
+
+    //获取某学校年级和班级
+    public function get_classes($sid) {
+        if(empty($sid)){
+            $this->returnApiError('学校信息为空');
+        }
+        $classes = D("Classes")->where('sid = %d',$sid)->select();
+        if ($classes){
+            $this->returnApiSuccess('',$classes);
+        }
+        else{
+            $this->returnApiError('无数据');
+        }
+    }
+
     /**
      * @param null $msg  返回正确的提示信息
      * @param flag success CURD 操作成功

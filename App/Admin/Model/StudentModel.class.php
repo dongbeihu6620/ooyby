@@ -12,7 +12,11 @@ class StudentModel extends Model {
     protected $tableName = 'student';
 
     public function studentsList() {
-        $students = $this->order("sid desc")->select();
+        $students = $this->table('xy_student s, xy_school l,xy_classes c')
+            ->where('s.school = l.id and s.classes = c.id')
+            ->field('s.sid as sid, s.uid as uid,s.school as school, s.grade as grade,s.classes as classes,s.status as status,s.realname as realname,
+            l.name as school,c.grade as grade,c.classes as classes')
+            ->order('s.sid desc');
         return $students;
     }
 

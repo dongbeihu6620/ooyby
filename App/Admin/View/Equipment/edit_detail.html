@@ -22,7 +22,7 @@
 <body>
 <div class="subnav">
     <div class="content-menu ib-a blue line-x">
-        <a class="add fb" href="__MODULE__/Equipment/add_detail"><em>添加设备</em></a>　    <a href="__MODULE__/Equipment/detail_index"><em>设备列表</em></a>
+        <a class="add fb" href="__MODULE__/Equipment/add_detail"><em>添加设备记录</em></a>　    <a href="__MODULE__/Equipment/detail_index"><em>设备记录列表</em></a>
     </div>
 </div>
 <div class="pad-lr-10">
@@ -39,6 +39,12 @@
                 <td width="10%" align="right">使用时长:</td>
                 <td width="90%">
                     <input type="text" class="input-text " name="info[use_length]"  value="<?php echo $equipment['use_length']; ?>" size="40"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%" align="right">添加时间:</td>
+                <td width="90%">
+                    <input type="text" class="input-text " name="info[dateline]"  value="<?php echo date("Y-m-d H:i:s", $equipment['dateline']); ?>" size="40"/>
                 </td>
             </tr>
         </table>
