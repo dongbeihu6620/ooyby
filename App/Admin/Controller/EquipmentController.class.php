@@ -216,6 +216,79 @@ class EquipmentController extends CommonController {
         return $str;
     }
 
+    //激活设备
+    public function check_activation() {
+        if (IS_POST) {
+            $code = $_POST['code'];
+            if (empty($code)) {
+                $this->error('激活码不能为空！', __MODULE__ . '/Equipment/index');
+            }
+            $this->checkToken();
+            $equipment = $this->db->where('activation_code = "%s"', $code)->select();
+            if (!empty($equipment)) {
+                if ($equipment[0]['status']== 1){
+                    $this->error('该设备之前已经激活过，请更换激活码！');
+                }
+                $_POST['info']['activation_time']=strtotime(date('y-m-d h:i:s',time()));
+                $_POST['info']['status']= 1;
+                if ($this->db->where(array('eid' => $equipment[0]['eid']))->save($_POST['info']) !== false) {
+                    $this->success('激活成功！', __MODULE__ . '/Equipment/index');
+                } else {
+                    $this->error('激活失败！', __MODULE__ . '/Equipment/index');
+                }
+            } else {
+                $this->error('激活码不存在！');
+            }
+        } else {
+            $this->display();
+        }
+    }
+
+    //取消激活设备
+    public function check_unactivation() {
+        if (IS_POST) {
+            $code = $_POST['code'];
+            if (empty($code)) {
+                $this->error('激活码不能为空！', __MODULE__ . '/Equipment/index');
+            }
+            $this->checkToken();
+            $equipment = $this->db->where('activation_code = "%s"', $code)->select();
+            if (!empty($equipment)) {
+                if ($equipment[0]['status']== 0){
+                    $this->error('该设备还未激活过，无法取消激活！');
+                }
+                $_POST['info']['activation_time']=0;
+                $_POST['info']['status']= 0;
+                if ($this->db->where(array('eid' => $equipment[0]['eid']))->save($_POST['info']) !== false) {
+                    $this->success('取消激活成功！', __MODULE__ . '/Equipment/index');
+                } else {
+                    $this->error('取消激活失败！', __MODULE__ . '/Equipment/index');
+                }
+            } else {
+                $this->error('激活码不存在！');
+            }
+        } else {
+            $this->display();
+        }
+    }
+
+    //终端概况-视力测试机
+    function equipment_count(){
+        //所有视力测试仪设备数量
+        $count['all_num'] = $this->db->where('type = 2')->count();
+        //已激活视力测试仪设备数量
+        $count['activation_num'] = $this->db->where('type = 2 and status = 1')->count();
+        $students = $this->db->vision_type_list()->group('e.sid')->select();
+        //使用视力测试仪测视力的学生数量
+        $count['students'] = count($students);
+        //使用视力测试仪测试的总数量
+        $count['vision_num'] = $this->db->vision_type_list()->count();
+
+        $this->assign('count', $count);
+        $this->display();
+
+    }
+
     /**
      * ajax检查设备号是否存在
      */

@@ -31,44 +31,33 @@
 </style>
 <div class="pad-lr-10">
     <form name="myform" action="__CONTROLLER__/listorder" method="post" id="myform" >
+        <div class="btn">
+            终端概况
+        </div>
         <div class="table-list">
             <table width="100%" cellspacing="0">
                 <thead>
                 <tr>
-                    <th width="50">ID</th>
-                    <th>设备名称</th>
-                    <th>家长姓名</th>
-                    <th>学生姓名</th>
-                    <th>设备号</th>
-                    <th>设备类型</th>
-                    <th>激活码</th>
-                    <th width="147">激活状态</th>
-                    <th width="143">操作</th>
+                    <th>设备数量</th>
+                    <th>激活数量</th>
+                    <th>激活比例</th>
+                    <th>服务用户数</th>
+                    <th>测试总次数</th>
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($equipments as $key => $Equipment) { ?>
                 <tr>
-                    <td align="center"><input type="text" style="width: 36px; text-align: center; height: 18px;" name="sort[<?php echo $Equipment['eid']; ?>]" value="<?php echo $Equipment['eid']; ?>" /></td>
-                    <td align="center"><?php echo $Equipment['name']; ?></td>
-                    <td align="center"><?php echo $Equipment['uname']; ?></td>
-                    <td align="center"><?php echo $Equipment['sname']; ?></td>
-                    <td align="center"><?php echo $Equipment['num']; ?></td>
-                    <td align="center"><?php if($Equipment[type]==1){echo "seex";}else if($Equipment[type]==2){echo "视力测试机";}else{echo "暂无";}  ?></td>
-                    <td align="center"><?php echo $Equipment['activation_code']; ?></td>
-                    <td align="center"><?php if($Equipment[status]==1){echo "已激活";}else{echo "未激活";} ?></td>
-                    <td align="center"><a href="__MODULE__/Equipment/edit/eid/<?php echo $Equipment['eid']; ?>">修改</a>
-                                     | <a class="delete" href="__MODULE__/Equipment/del/eid/<?php echo $Equipment['eid']; ?>">删除</a>
-                                     </td>
+                    <td align="center"><?php echo $count['all_num']; ?></td>
+                    <td align="center"><?php echo $count['activation_num']; ?></td>
+                    <td align="center"><?php if($count['activation_num']==0){echo "0.00%";}else{ echo round($count['activation_num']/$count['all_num'],2);} ?></td>
+                    <td align="center"><?php echo $count['students']; ?></td>
+                    <td align="center"><?php echo $count['vision_num']; ?></td>
                 </tr>
-                <?php } ?>
                 </tbody>
             </table>
             <div class="pagelist">{$page}</div>
         </div>
-        <div class="btn">
-            <input type="submit" class="button" name="dosubmit" value="排序"/>
-        </div>
+
     </form>
 </div>
 <script type="text/javascript">

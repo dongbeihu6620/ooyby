@@ -27,14 +27,18 @@ class PublicController extends Controller {
     }
 
     // 登录检测
-    public function checkLogin($grade,$classes,$number) {
+    public function checkLogin($school,$grade,$classes,$number) {
         if(empty($grade)) {
             $this->returnApiError('年级为空');
-        }elseif (empty($classes)) {
+        }
+        if(empty($classes)) {
             $this->returnApiError('班级为空');
         }
-        elseif (empty($number)) {
+        if(empty($number)) {
             $this->returnApiError('学号为空');
+        }
+        if(empty($school)) {
+            $this->returnApiError('学校为空');
         }
         $data = array();
         $data['ip']    = get_client_ip();
@@ -44,10 +48,20 @@ class PublicController extends Controller {
         $data['action'] = ACTION_NAME;
         $data['querystring'] = U( MODULE_NAME . '/' . ACTION_NAME );
 
-        $studentInfo = D("student")->where('grade = "%s" and classes = "%s" and number = "%s"',$grade,$classes,$number)->order("sid desc")->select();
+        $school = D("school")->field('id')->where('name = "%s"',$school)->select();
+        if (empty($school)){
+            $this->returnApiError('该学校名称不存在');
+        }
+
+        $classes = D("classes")->where('classes = "%s" and grade = "%s" and sid = %d',$classes,$grade,$school[0]['id'])->order("sid desc")->select();
+        if (empty($classes)){
+            $this->returnApiError('年级或班级不存在');
+        }
+
+        $studentInfo = D("student")->where('classes = %d and school = %d and number = "%s"',$classes[0]['id'],$school[0]['id'],$number)->order("sid desc")->select();
 
         if(!$studentInfo) {
-            $this->returnApiError('年级、班级或者学号错误！');
+            $this->returnApiError('学号错误！');
         }
         else {
             if(!$studentInfo[0]['status']) {

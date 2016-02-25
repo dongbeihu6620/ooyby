@@ -69,7 +69,12 @@ class EquipmentModel extends Model {
         return $equipments;
     }
 
-
+    //获取设备信息
+    public function vision_type_list() {
+        $visions = $this->table('xy_equipment e, xy_vision v')
+            ->where('e.eid = v.eid and e.type = 2');
+        return $visions;
+    }
 
 
 }
